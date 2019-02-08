@@ -6,3 +6,7 @@ Modules for working with the fetch API in an FP setting.
 
 -   One API, multiple axes.
 -   Ratio of tests to code.
+
+# Domain
+
+We are designing an API, driven by tests, whilst simulataneously developing a domain language.

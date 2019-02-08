@@ -1,17 +1,4 @@
-//
-// We are designing an API and developing a domain language, driven by tests.
-//
-//      Getting         =>  Fetching
-//      Request         =>  Request
-//      Receiving       =>  Handling a fetch promise
-//      Providing       =>  Resolving a promise
-//      Payload         =>  JSON
-//      Rejecting       =>  Rejecting a promise         -->  Announcing failures
-//
-const get = fetch => () =>
-    new Promise(resolve => {
-        fetch.then(resolve);
-    });
+import { get } from "../src/rest";
 
 describe("invoking", () => {
     describe("always", () => {
@@ -25,11 +12,12 @@ describe("invoking", () => {
     });
 
     describe("with a url", () => {
-        describe("passes the url to fetch", () => {
-            const fetch = new Promise(resolve => resolve);
-            const url = "http://bbc.co.uk";
+        const url = "https://github.com";
 
-            get(fetch)(url);
+        it("uses the url with fetch", () => {
+            const fakeFetch = jest.fn();
+            get(fakeFetch)(url);
+            expect(fakeFetch).toHaveBeenCalledWith(url);
         });
     });
 });
@@ -39,8 +27,8 @@ describe("providing json", () => {
 });
 
 describe("scheduling", () => {
-    it("resolves within the schedule", () => {});
-    it("rejects when the schedule expires", () => {});
+    it("resolves when fetch completes before the schedule expires", () => {});
+    it("rejects when fetch doesn't complete before the schedule expires", () => {});
 });
 
 describe("retrying", () => {
@@ -63,5 +51,27 @@ describe("retrying", () => {
     describe("with a schedule", () => {
         it("retries one time when the schedule expires", () => {});
         it("retries multiple times when the schedule expires", () => {});
+    });
+});
+
+describe("announcing failures", () => {
+    describe("when the request is malformed", () => {
+        // 400.
+        it("announces the failure", () => {});
+    });
+
+    describe("when the request is not authorised", () => {
+        // 403.
+        it("announces the failure", () => {});
+    });
+
+    describe("when the endpoint is not reachable", () => {
+        // 404.
+        it("announces the failure", () => {});
+    });
+
+    describe("when the endpoint fails spectacularly", () => {
+        // 500.
+        it("announces the failure", () => {});
     });
 });
