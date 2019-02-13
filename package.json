@@ -1,7 +1,7 @@
 {
     "name": "fetch-js",
     "version": "1.0.0",
-    "description": "Utilities for working with the fetch API",
+    "description": "A library for working with the fetch API in an FP setting.",
     "main": "index.js",
     "author": "mcannon",
     "license": "ISC",
