@@ -1,34 +1,8 @@
 import { get } from "../src/rest";
 
-describe("invoking", () => {
-    describe("always", () => {
-        it("provides a function", () => {
-            expect(typeof get(/* fetch */)).toBe("function");
-        });
-
-        it("provides a promise", () => {
-            expect(typeof get(/* fetch */)(/* url */)).toBe(typeof new Promise(resolve => resolve));
-        });
-    });
-
-    describe("with a url", () => {
-        const url = "https://github.com";
-
-        it("uses the url with fetch", () => {
-            const fakeFetch = jest.fn();
-            get(fakeFetch)(url);
-            expect(fakeFetch).toHaveBeenCalledWith(url);
-        });
-    });
-});
-
-describe("providing json", () => {
-    it("provides json", () => {});
-});
-
 describe("scheduling", () => {
     it("resolves when fetch completes before the schedule expires", () => {});
-    it("rejects when fetch doesn't complete before the schedule expires", () => {});
+    it("rejects when fetch does not complete before the schedule expires", () => {});
 });
 
 describe("retrying", () => {
@@ -54,23 +28,23 @@ describe("retrying", () => {
     });
 });
 
-describe("announcing failures", () => {
-    describe("when the request is malformed", () => {
+describe("handling failures", () => {
+    describe("when fetch reports a malformed request", () => {
         // 400.
         it("announces the failure", () => {});
     });
 
-    describe("when the request is not authorised", () => {
+    describe("when fetch reports an unauthorised request", () => {
         // 403.
         it("announces the failure", () => {});
     });
 
-    describe("when the endpoint is not reachable", () => {
+    describe("when fetch reports a non-existent endpoint", () => {
         // 404.
         it("announces the failure", () => {});
     });
 
-    describe("when the endpoint fails spectacularly", () => {
+    describe("when fetch reports a spectacular server fail", () => {
         // 500.
         it("announces the failure", () => {});
     });
