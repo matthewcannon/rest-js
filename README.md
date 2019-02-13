@@ -1,6 +1,6 @@
 # rest-js
 
-Modules for working with the fetch API in an FP setting.
+A library for working with the fetch API in an FP setting.
 
 # Concern, context, observations
 
